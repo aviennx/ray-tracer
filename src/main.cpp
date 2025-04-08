@@ -9,6 +9,7 @@ void write_ppm(int width, int height, const std::vector<unsigned char>& pixels) 
     std::cout << "P3\n" << width << ' ' << height << "\n255\n";
 
     for (int j = 0; j < height; j++) {
+        std::clog << "\rScanlines remaining: " << (height - j) << ' ' << std::flush;
         for (int i = 0; i < width; i++) {
             int index = (j * width + i) * 3;
             std::cout << static_cast<int>(pixels[index]) << ' '
@@ -16,6 +17,7 @@ void write_ppm(int width, int height, const std::vector<unsigned char>& pixels) 
                       << static_cast<int>(pixels[index + 2]) << '\n';
         }
     }
+    std::clog << "\rDone.                 \n";
 }
 
 void write_png(const char* filename, int width, int height, const std::vector<unsigned char>& pixels) {
@@ -32,6 +34,7 @@ int main() {
 
     // Generate gradient
     for (int j = 0; j < image_height; j++) {
+        std::clog << "\rGenerating pixels: " << (image_height - j) << " scanlines remaining " << std::flush;
         for (int i = 0; i < image_width; i++) {
             auto r = double(i) / (image_width-1);
             auto g = double(j) / (image_height-1);
@@ -43,12 +46,15 @@ int main() {
             pixels[index + 2] = static_cast<unsigned char>(255.999 * b);
         }
     }
+    std::clog << "\rDone generating pixels.                 \n";
 
     // Write PPM to stdout
     write_ppm(image_width, image_height, pixels);
 
     // Write PNG to file
+    std::clog << "Writing PNG file...\n";
     write_png("image.png", image_width, image_height, pixels);
+    std::clog << "Done writing PNG file.\n";
 
     return 0;
 } 
