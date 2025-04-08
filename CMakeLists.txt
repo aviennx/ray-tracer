@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(RayTracer VERSION 1.0)
+project(raytracer)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -8,5 +8,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/third_party)
 
-# Add executable
-add_executable(raytracer src/main.cpp) 
+# Add executables
+add_executable(raytracer src/main.cpp)
+add_executable(ppm2png src/ppm2png.cpp) 
