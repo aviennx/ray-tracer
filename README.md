@@ -1,49 +1,59 @@
-# Ray Tracer
+# Ray Tracer Implementation Progress
 
-A modern ray tracing implementation in C++ with web interface support using React and JavaScript.
+## Current Implementation Status
 
-## Project Structure
+We have implemented a basic ray tracer that can:
+1. Generate images in both PPM and PNG formats
+2. Create a blue-to-white gradient background
+3. Render a red sphere at position (0,0,-1) with radius 0.5
 
-- `src/` - C++ source files
-- `include/` - C++ header files
-- `web/` - React and JavaScript web interface
-- `cmake/` - CMake configuration files
-- `build/` - Build output directory
+## Key Components Implemented
 
-## Features
+### Vector and Color Classes
+- `vec3.h`: 3D vector class with basic operations
+- `color.h`: Color type alias and color writing utilities
 
-- Real-time ray tracing simulation
-- Web-based visualization interface
-- Object-oriented design
-- Cross-platform support
+### Ray Class
+- `ray.h`: Ray representation with origin and direction
+- Ray-sphere intersection testing
 
-## Building the Project
+### Image Generation
+- PPM format output
+- PNG format conversion utility
+- Progress indicator during rendering
 
-### Prerequisites
+### Camera Setup
+- Viewport configuration
+- Ray generation for each pixel
+- Aspect ratio handling (16:9)
 
-- C++17 compatible compiler
-- CMake 3.10 or higher
-- Node.js and npm (for web interface)
+## Current Features
+- 400x225 pixel output (maintaining 16:9 aspect ratio)
+- Blue-to-white gradient background
+- Red sphere rendering
+- Progress logging during rendering
+- Dual output format support (PPM and PNG)
 
-### Build Instructions
+## Next Steps
+1. Improve sphere intersection calculations
+2. Add surface normals for better shading
+3. Implement multiple objects
+4. Add lighting and materials
+5. Implement shadows and reflections
 
-1. Create build directory:
+## Build Instructions
 ```bash
-mkdir build && cd build
-```
-
-2. Configure and build:
-```bash
+cd build
 cmake ..
 make
+./raytracer > image.ppm
+./ppm2png image.ppm image.png
 ```
 
-3. Build web interface:
-```bash
-cd web
-npm install
-npm run build
-```
+## Dependencies
+- C++17
+- CMake
+- stb_image_write (included in third_party/)
 
 ## License
 
